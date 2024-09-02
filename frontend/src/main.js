@@ -14,4 +14,4 @@ createApp(App)
 .use(Toast)
 .use(router)
 
-mount('#app')
+.mount('#app')
