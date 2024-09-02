@@ -64,11 +64,29 @@
     </div>
   </template>
 
-<script>
-export default {
+<script setup>
+    import { computed, onMounted, reactive } from 'vue'
+    import { useRoute } from 'vue-router'
+    import axios from 'axios'
+    import AddReview from '../reviews/AddReview.vue'
+    import UpdateReview from '../reviews/UpdateReview.vue'
+    import StarRating from 'vue-star-rating'
+    import ReviewsList from '../reviews/ReviewsList.vue'
+    import { useToast } from 'vue-toastification'
 
-}
+    const route = useRoute()
+
+    const toast = useToast()
+
+    const data = reactive({
+      product: null,
+      reviewToUpdate: {
+        updating: false,
+        data: null
+      }
+    })
 </script>
+
 
 <style>
 
