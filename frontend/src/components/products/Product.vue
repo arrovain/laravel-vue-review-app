@@ -84,7 +84,18 @@
         updating: false,
         data: null
       }
+      
     })
+    const reviewAvg = computed(() => parseInt(data.product.reviews.reduce((acc, review) => acc + review.rating / data.product.reviews.length, 0)))
+
+const fetchAllProductById = async () => {
+  try {
+    const response = await axios.get(`http://127.0.0.1:8000/api/product/${route.params.id}/show`)
+    data.product = response.data.data
+  } catch (error) {
+    console.log(error)
+  }
+}
 </script>
 
 
