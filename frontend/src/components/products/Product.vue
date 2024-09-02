@@ -96,6 +96,56 @@ const fetchAllProductById = async () => {
     console.log(error)
   }
 }
+
+
+const setProduct = (newProductData) => {
+      data.product = newProductData
+      if(data.reviewToUpdate.updating) {
+        data.reviewToUpdate =  {
+          updating: false,
+          data: null
+        }
+      }
+    }
+
+    const editReview = (review) => {
+      data.reviewToUpdate = {
+        updating: true,
+        data: review
+      }
+    }
+
+    const cancelUpdating = () => {
+      if(data.reviewToUpdate.updating) {
+        data.reviewToUpdate =  {
+          updating: false,
+          data: null
+        }
+      }
+    }
+
+    const deleteReview = async (review_id) => {
+      if(confirm('are you sure you want to remove this review?')) {
+        try {
+            const response = await axios.post(`http://127.0.0.1:8000/api/review/${data.product.id}/delete`,
+                {
+                  review_id
+                }
+            )
+
+            data.product = response.data.data
+
+            toast.success('Review has been deleted successfully', {
+                timeout: 2000
+            })
+
+        } catch (error) {
+            console.log(error)
+        }
+      }
+    }
+
+    onMounted(() => fetchAllProductById())
 </script>
 
 
